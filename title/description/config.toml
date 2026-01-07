@@ -1,20 +1,35 @@
-# 全局配置（顶部）
-title = "Foreign Trade Studio"
-baseURL = "https://your-project.vercel.app"  # 替换为你实际的 Vercel 域名
-languageCode = "en-us"
-description = "Professional foreign trade services for global business expansion"  # 全局描述
+# ===================== 基础配置（RSS核心依赖）=====================
+baseURL = "https://hugo-smoky.vercel.app/"  # 替换为你的网站实际域名（必须填，RSS链接基于此生成）
+languageCode = "zh-CN"  # 网站语言（中文填zh-CN，英文填en-us）
+title = "我的Hugo博客"  # 你的网站/RSS标题（会显示在RSS阅读器中）
+description = "分享技术笔记、生活感悟的个人博客"  # 网站/RSS描述（RSS阅读器会展示）
+author = "你的名字"  # 作者名称（会写入RSS的<author>字段）
+copyright = "© 2026 你的名字. 保留所有权利."  # 版权信息（可选，会显示在RSS中）
 
-# 多语言配置补充
-[languages]
-[languages.en]
-title = "Foreign Trade Studio"
-weight = 1
-contentDir = "content/en"
-languageName = "English"
-description = "Professional foreign trade services (English)"  # 语言分支描述
-[languages.fr]
-title = "Studio de Commerce Extérieur"
-weight = 2
-contentDir = "content/fr"
-languageName = "Français"
-description = "Services professionnels de commerce extérieur (Français)"  # 法语描述
+# ===================== RSS专属优化配置（可选但推荐）=====================
+[outputs]
+home = ["HTML", "RSS", "JSON"]  # 确保首页输出RSS格式（默认已包含，防止被删除）
+
+[params]
+# RSS额外元信息（可选，增强阅读器兼容性）
+rss_title = "我的Hugo博客 - RSS订阅"  # 自定义RSS标题（优先级高于上面的title）
+rss_description = "实时获取我的最新文章更新"  # 自定义RSS描述
+
+# ===================== 主题相关配置（如果使用主题，需确保主题支持RSS）=====================
+# 以主流主题PaperMod为例（如果你的主题不同，可忽略或适配主题配置）
+[theme]
+name = "PaperMod"  # 你的主题名称（确保主题没有屏蔽RSS输出）
+
+[markup.goldmark.renderer]
+unsafe = true  # 允许HTML标签在文章中生效（RSS会保留文章中的HTML格式）
+
+# ===================== 可选：自定义RSS输出规则（进阶）=====================
+[outputFormats.RSS]
+mediaType = "application/rss+xml"
+baseName = "feed"  # RSS文件名（默认是feed.xml，可改为rss.xml）
+isPlainText = false
+
+# 控制RSS中显示的文章数量（默认20篇，可调整）
+[params.rss]
+limit = 30  # 显示最近30篇文章
+showFullContent = false  # false=只显示文章摘要，true=显示完整文章（根据需求选择）
