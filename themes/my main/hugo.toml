@@ -1,0 +1,230 @@
+# ==============================================
+# 基础配置（优化：明确版本依赖+部署提示）
+# ==============================================
+# 部署后必须替换为 Vercel 实际域名（如 https://your-site.vercel.app），本地调试留空
+baseURL = ""
+languageCode = "en-us"
+# 强制要求 Hugo 最低版本（避免旧版本不兼容新特性）
+min_version = "0.120.0"
+# Hugo 默认资源目录（保持稳定，避免路径异常）
+resourceDir = "resources"
+
+
+# ==============================================
+# 远程主题配置（核心优化：改用 Hugo Modules 加载，稳定兼容）
+# ==============================================
+# 替换原 `theme` 字段：Hugo 推荐用 Modules 管理远程主题，解决“主题加载失败”问题
+[module]
+  # 启用模块依赖（必须配置，否则远程主题无法加载）
+  [[module.imports]]
+    path = "github.com/theNewDynamic/gohugo-theme-ananke"
+    version = "v2.9.0"  # 锁定主题版本（从主题 GitHub Releases 获取，避免自动更新破环兼容）
+
+
+# ==============================================
+# 站点核心功能配置（优化：补充多语言菜单+SEO细节）
+# ==============================================
+# 默认语言（英文优先，适配外贸场景）
+DefaultContentLanguage = "en"
+# 启用菜单自动生成（基于 content 目录结构）
+SectionPagesMenu = "main"
+# 分页数量（文章列表每页 10 篇）
+Paginate = 10
+# 谷歌分析（后续替换为实际 ID，暂时留空）
+googleAnalytics = ""
+# 启用机器人协议+站点地图（双端 SEO 优化）
+enableRobotsTXT = true
+# 启用 Git 提交信息（记录文章更新时间，提升内容可信度）
+enableGitInfo = true
+
+# 多语言配置（优化：添加语言切换菜单，实现前端多语言交互）
+[languages]
+  [languages.en]
+    title = "Foreign Trade Studio"
+    weight = 1  # 权重越高，默认显示优先级越高
+    contentDir = "content/en"  # 需手动创建该目录（存放英文内容）
+    languageName = "English"
+    # 补充：语言切换菜单（Ananke 主题需显式配置）
+    [[languages.en.menu.main]]
+      name = "Français"
+      url = "/fr/"
+      weight = 2
+    [[languages.en.menu.main]]
+      name = "简体中文"
+      url = "/zh-hans/"
+      weight = 3
+    [[languages.en.menu.main]]
+      name = "繁體中文"
+      url = "/zh-hant/"
+      weight = 4
+
+  [languages.fr]
+    title = "Studio de Commerce Extérieur"
+    weight = 2
+    contentDir = "content/fr"  # 需手动创建该目录（存放法文内容）
+    languageName = "Français"
+    [[languages.fr.menu.main]]
+      name = "English"
+      url = "/"
+      weight = 1
+    [[languages.fr.menu.main]]
+      name = "简体中文"
+      url = "/zh-hans/"
+      weight = 3
+    [[languages.fr.menu.main]]
+      name = "繁體中文"
+      url = "/zh-hant/"
+      weight = 4
+
+  [languages.zh-hans]
+    title = "外贸工作室"
+    weight = 3
+    contentDir = "content/zh-hans"  # 需手动创建该目录（存放简体中文内容）
+    languageName = "简体中文"
+    [[languages.zh-hans.menu.main]]
+      name = "English"
+      url = "/"
+      weight = 1
+    [[languages.zh-hans.menu.main]]
+      name = "Français"
+      url = "/fr/"
+      weight = 2
+    [[languages.zh-hans.menu.main]]
+      name = "繁體中文"
+      url = "/zh-hant/"
+      weight = 4
+
+  [languages.zh-hant]
+    title = "外貿工作室"
+    weight = 4
+    contentDir = "content/zh-hant"  # 需手动创建该目录（存放繁体中文内容）
+    languageName = "繁體中文"
+    [[languages.zh-hant.menu.main]]
+      name = "English"
+      url = "/"
+      weight = 1
+    [[languages.zh-hant.menu.main]]
+      name = "Français"
+      url = "/fr/"
+      weight = 2
+    [[languages.zh-hant.menu.main]]
+      name = "简体中文"
+      url = "/zh-hans/"
+      weight = 3
+
+
+# ==============================================
+# SEO 优化配置（优化：增强站点地图+链接友好性）
+# ==============================================
+[sitemap]
+  changefreq = "weekly"  # 站点更新频率（匹配外贸内容更新节奏）
+  priority = 0.8         # 搜索引擎优先级（0.8 为核心内容推荐值）
+  filename = "sitemap.xml"
+  # 补充：多语言站点地图自动生成
+  [sitemap.languages]
+    en = "sitemap-en.xml"
+    fr = "sitemap-fr.xml"
+    zh-hans = "sitemap-zh-hans.xml"
+    zh-hant = "sitemap-zh-hant.xml"
+
+# 链接格式优化（友好 URL，提升 SEO 收录效果）
+[permalinks]
+  posts = "/:year/:month/:slug/"  # 文章链接：/年/月/标题（简洁+包含时间维度）
+  pages = "/:slug/"               # 单页链接：/标题（无冗余参数）
+
+
+# ==============================================
+# 资源压缩配置（优化：细化压缩规则，提升加载速度）
+# ==============================================
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false
+  disableJSON = false
+  disableSVG = false
+  disableXML = false
+  minifyOutput = true
+  # 补充：HTML 压缩细节（移除空白/注释，进一步减小体积）
+  [minify.html]
+    collapseWhitespace = true
+    removeComments = true
+    removeRedundantAttributes = true
+  # 补充：CSS 压缩细节（合并重复规则）
+  [minify.css]
+    enableSourceMap = false
+    precision = 2
+
+
+# ==============================================
+# 站点展示参数（优化：适配 Ananke 主题交互）
+# ==============================================
+[params]
+  text_color = ""
+  author = "Foreign Trade Studio Team"
+  favicon = "favicon.ico"  # 需在 static/ 目录放置该文件（网站图标）
+  site_logo = ""           # 若需 Logo，将文件放 static/ 后填写文件名（如 "logo.png"）
+  description = "Professional foreign trade services for global business expansion"  # SEO 核心描述
+  background_color_class = "bg-navy"  # Ananke 主题内置配色（适配外贸专业感）
+  recent_posts_number = 6  # 首页最新文章显示数量（匹配用户浏览习惯）
+  date_format = "January 2, 2006"  # 英文日期格式（适配海外用户）
+  time_format = "3:04 PM"
+  # 补充：Ananke 主题功能开关（显示作者信息）
+  show_author_byline = true
+
+
+# ==============================================
+# 社交平台链接（优化：适配 Ananke 主题最新图标规则）
+# ==============================================
+[params.ananke_socials]
+  [[params.ananke_socials]]
+    name = "twitter"
+    url = "https://twitter.com/yourcompany"  # 替换为实际账号
+  [[params.ananke_socials]]
+    name = "linkedin"
+    url = "https://linkedin.com/company/yourcompany"  # 替换为实际账号
+  [[params.ananke_socials]]
+    name = "facebook"
+    url = "https://facebook.com/yourcompany"  # 替换为实际账号
+  [[params.ananke_socials]]
+    name = "youtube-channel"  # 优化：Ananke 新版用该名称匹配图标（原 "youtube" 无法显示）
+    url = "https://youtube.com/@yourcompany"  # 替换为实际账号
+
+
+# ==============================================
+# 隐私策略配置（保持原逻辑，适配海外法规）
+# ==============================================
+[privacy]
+  [privacy.disqus]
+    disable = true
+  [privacy.googleAnalytics]
+    disable = true  # 后续添加 GA ID 后改为 false
+    anonymizeIP = true
+    respectDoNotTrack = true
+  [privacy.instagram]
+    disable = true
+  [privacy.twitter]
+    disable = false
+    enableDNT = true
+    simple = true
+  [privacy.vimeo]
+    disable = true
+  [privacy.youtube]
+    disable = false
+    privacyEnhanced = true  # 启用 YouTube 隐私增强模式（符合 GDPR）
+
+
+# ==============================================
+# 安全配置（优化：适配 Vercel 部署环境）
+# ==============================================
+[security]
+  enableInlineShortcodes = false
+  [security.exec]
+    allow = ['^(dart-)?sass(-embedded)?$', '^go$', '^npx$', '^postcss$']
+    # 优化：加入 Vercel 部署所需环境变量，避免构建失败
+    osEnv = ['(?i)^((HTTPS?|NO)_PROXY|PATH(EXT)?|APPDATA|TE?MP|TERM|GO\\w+|(XDG_CONFIG_)?HOME|USERPROFILE|SSH_AUTH_SOCK|DISPLAY|LANG|SYSTEMDRIVE|CI|VERCEL_)$']
+  [security.funcs]
+    # 优化：允许 Vercel 环境变量读取
+    getenv = ['^HUGO_', '^CI$', '^VERCEL_']
+  [security.http]
+    methods = ['(?i)GET|POST']
+    urls = ['.*']

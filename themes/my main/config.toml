@@ -1,0 +1,98 @@
+title = "Foreign Trade Studio"
+baseURL = "https://your-project.vercel.app"
+languageCode = "en-us"
+theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
+resourceDir = "../resources"
+
+DefaultContentLanguage = "en"
+SectionPagesMenu = "main"
+Paginate = 10
+googleAnalytics = "G-XXXXXXXXXX"
+enableRobotsTXT = true
+enableGitInfo = true
+
+[languages]
+[languages.en]
+title = "Foreign Trade Studio"
+weight = 1
+contentDir = "content/en"
+languageName = "English"
+[languages.fr]
+title = "Studio de Commerce Extérieur"
+weight = 2
+contentDir = "content/fr"
+languageName = "Français"
+
+[sitemap]
+changefreq = "weekly"
+priority = 0.8
+filename = "sitemap.xml"
+
+[permalinks]
+posts = "/:year/:month/:slug/"
+pages = "/:slug/"
+
+[minify]
+disableCSS = false
+disableHTML = false
+disableJS = false
+disableJSON = false
+disableSVG = false
+disableXML = false
+minifyOutput = true
+
+[params]
+text_color = ""
+author = "Foreign Trade Studio Team"
+favicon = "favicon.ico"
+site_logo = ""
+description = "Professional foreign trade services for global business expansion"
+background_color_class = "bg-navy"
+recent_posts_number = 6
+date_format = "January 2, 2006"
+time_format = "3:04 PM"
+
+# 修正：社交账号配置（外层 table + 内层 social 数组）
+[params.ananke_socials]
+[[params.ananke_socials.social]]  # 正确：数组元素用 .social 区分
+name = "twitter"
+url = "https://twitter.com/yourcompany"
+[[params.ananke_socials.social]]
+name = "linkedin"
+url = "https://linkedin.com/company/yourcompany"
+[[params.ananke_socials.social]]
+name = "facebook"
+url = "https://facebook.com/yourcompany"
+[[params.ananke_socials.social]]
+name = "youtube"
+url = "https://youtube.com/@yourcompany"
+
+[privacy]
+[privacy.disqus]
+disable = true
+[privacy.googleAnalytics]
+disable = false
+anonymizeIP = true
+respectDoNotTrack = true
+[privacy.instagram]
+disable = true
+[privacy.twitter]
+disable = false
+enableDNT = true
+simple = true
+[privacy.vimeo]
+disable = true
+[privacy.youtube]
+disable = false
+privacyEnhanced = true
+
+[security]
+enableInlineShortcodes = false
+[security.exec]
+allow = ['^(dart-)?sass(-embedded)?$', '^go$', '^npx$', '^postcss$']
+osEnv = ['(?i)^((HTTPS?|NO)_PROXY|PATH(EXT)?|APPDATA|TE?MP|TERM|GO\\w+|(XDG_CONFIG_)?HOME|USERPROFILE|SSH_AUTH_SOCK|DISPLAY|LANG|SYSTEMDRIVE)$']
+[security.funcs]
+getenv = ['^HUGO_', '^CI$']
+[security.http]
+methods = ['(?i)GET|POST']
+urls = ['.*']

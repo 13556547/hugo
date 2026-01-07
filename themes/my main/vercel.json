@@ -1,0 +1,51 @@
+{
+  "version": 2, // 指定 Vercel 配置版本，保障兼容性
+  "build": {
+    "env": {
+      "HUGO_VERSION": "0.154.3", // 保留你指定的 Hugo 版本
+      "HUGO_ENV": "production" // 新增：指定 Hugo 生产环境，避免开发模式问题
+    }
+  },
+  "builds": [ // 核心新增：解决构建冲突的关键配置
+    {
+      "src": "hugo.toml",
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "hugo --gc --minify --cleanDestinationDir", // 适配指定 Hugo 版本的构建指令
+        "outputDirectory": "public"
+      }
+    }
+  ],
+  "routes": [ // 整合安全头 + 缓存优化
+    {
+      "source": "/(.*)",
+      "dest": "/$1",
+      "headers": [
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains; preload"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Powered-By",
+          "value": "Hugo"
+        },
+        { // 新增：静态资源缓存优化，不影响你的安全头
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, s-maxage=1209600"
+        }
+      ]
+    }
+  ]
+}
