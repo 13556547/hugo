@@ -1,0 +1,20 @@
+# 全局配置（顶部）
+title = "Foreign Trade Studio"
+baseURL = "https://your-project.vercel.app"  # 替换为你实际的 Vercel 域名
+languageCode = "en-us"
+description = "Professional foreign trade services for global business expansion"  # 全局描述
+
+# 多语言配置补充
+[languages]
+[languages.en]
+title = "Foreign Trade Studio"
+weight = 1
+contentDir = "content/en"
+languageName = "English"
+description = "Professional foreign trade services (English)"  # 语言分支描述
+[languages.fr]
+title = "Studio de Commerce Extérieur"
+weight = 2
+contentDir = "content/fr"
+languageName = "Français"
+description = "Services professionnels de commerce extérieur (Français)"  # 法语描述
