@@ -1,0 +1,29 @@
+- title: "Import/Export Services"
+  icon: "ship"
+  description: "Comprehensive import and export solutions for your business needs"
+  link: "/services/import-export"
+
+- title: "Market Analysis"
+  icon: "chart-line"
+  description: "In-depth market research and analysis to identify opportunities"
+  link: "/services/market-analysis"
+
+- title: "Supply Chain Management"
+  icon: "truck"
+  description: "End-to-end supply chain optimization and logistics"
+  link: "/services/supply-chain"
+
+- title: "Customs Clearance"
+  icon: "file-alt"
+  description: "Efficient and compliant customs brokerage services"
+  link: "/services/customs"
+
+- title: "Trade Finance"
+  icon: "dollar-sign"
+  description: "Financial solutions for international trade transactions"
+  link: "/services/finance"
+
+- title: "Consulting"
+  icon: "lightbulb"
+  description: "Expert consulting on international trade strategies"
+  link: "/services/consulting"

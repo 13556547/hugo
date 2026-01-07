@@ -1,0 +1,19 @@
+- name: "Twitter"
+  url: "https://twitter.com/yourcompany"
+  icon: "twitter"
+
+- name: "LinkedIn"
+  url: "https://linkedin.com/company/yourcompany"
+  icon: "linkedin"
+
+- name: "Facebook"
+  url: "https://facebook.com/yourcompany"
+  icon: "facebook"
+
+- name: "Instagram"
+  url: "https://instagram.com/yourcompany"
+  icon: "instagram"
+
+- name: "YouTube"
+  url: "https://youtube.com/@yourcompany"
+  icon: "youtube"

@@ -1,0 +1,44 @@
+- name: "North America"
+  countries:
+    - "United States"
+    - "Canada"
+    - "Mexico"
+
+- name: "Europe"
+  countries:
+    - "United Kingdom"
+    - "Germany"
+    - "France"
+    - "Italy"
+    - "Spain"
+    - "Netherlands"
+
+- name: "Asia Pacific"
+  countries:
+    - "China"
+    - "Japan"
+    - "South Korea"
+    - "Singapore"
+    - "Australia"
+    - "India"
+
+- name: "Latin America"
+  countries:
+    - "Brazil"
+    - "Argentina"
+    - "Chile"
+    - "Colombia"
+
+- name: "Middle East"
+  countries:
+    - "United Arab Emirates"
+    - "Saudi Arabia"
+    - "Qatar"
+    - "Israel"
+
+- name: "Africa"
+  countries:
+    - "South Africa"
+    - "Nigeria"
+    - "Egypt"
+    - "Kenya"
